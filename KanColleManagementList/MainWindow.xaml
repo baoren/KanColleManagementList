@@ -1,0 +1,127 @@
+﻿<Window x:Class="KanColleManagementList.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KanColleManagementList"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <!-- AppXML側で定義すればここに書かなくて済みそうだけど今回はやらない -->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Menu x:Name="MenuBar" Grid.Column="0" Grid.ColumnSpan="8" VerticalAlignment="Top" Background="Gainsboro">
+            <MenuItem Header="メニュー">
+                <MenuItem Header="データ"></MenuItem>
+                <MenuItem Header="CSVインポート"></MenuItem>
+                <MenuItem Header="CSVエクスポート"></MenuItem>
+            </MenuItem>
+        </Menu>
+        
+        <TextBox Grid.Column="0" Grid.ColumnSpan="2"  Grid.Row="1" VerticalAlignment="Bottom" Margin="5,0,0,2"/>
+        <Button x:Name="SearchButton" Content="検索" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Bottom" Width="100" Margin="0,0,0,2" Click="SearchButton_Click"/>
+        <Button x:Name="CancelButton" Content="取り消し" Grid.Column="3" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Bottom" Width="100" Margin="0,0,0,2" Click="CancelButton_Click"/>
+        
+        <Grid Grid.Row="2" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="8" Background="#FFC8C8C8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+            </Grid.RowDefinitions>
+            <CheckBox Content="すべて選択" Grid.Row="0" Grid.Column="0" IsChecked="True"/>
+            <CheckBox Content="戦艦" Grid.Row="0" Grid.Column="1" IsChecked="True"/>
+            <CheckBox Content="巡洋戦艦" Grid.Row="0" Grid.Column="2" IsChecked="True"/>
+            <CheckBox Content="航空戦艦" Grid.Row="0" Grid.Column="3" IsChecked="True"/>
+            <CheckBox Content="超弩級戦艦" Grid.Row="0" Grid.Column="4" IsChecked="True"/>
+            <CheckBox Content="空母" Grid.Row="0" Grid.Column="5" IsChecked="True"/>
+            <CheckBox Content="装甲空母" Grid.Row="0" Grid.Column="6" IsChecked="True"/>
+            <CheckBox Content="軽空母" Grid.Row="0" Grid.Column="7" IsChecked="True"/>
+            <CheckBox Content="重巡洋艦" Grid.Row="0" Grid.Column="8" IsChecked="True"/>
+            <CheckBox Content="航空巡洋艦" Grid.Row="1" Grid.Column="0" IsChecked="True"/>
+            <CheckBox Content="軽巡洋艦" Grid.Row="1" Grid.Column="1" IsChecked="True"/>
+            <CheckBox Content="重雷装巡洋艦" Grid.Row="1" Grid.Column="2" IsChecked="True"/>
+            <CheckBox Content="練習巡洋艦" Grid.Row="1" Grid.Column="3" IsChecked="True"/>
+            <CheckBox Content="防空巡洋艦" Grid.Row="1" Grid.Column="4" IsChecked="True"/>
+            <CheckBox Content="駆逐艦" Grid.Row="1" Grid.Column="5" IsChecked="True"/>
+            <CheckBox Content="海防艦" Grid.Row="1" Grid.Column="6" IsChecked="True"/>
+            <CheckBox Content="潜水艦" Grid.Row="1" Grid.Column="7" IsChecked="True"/>
+            <CheckBox Content="潜水空母" Grid.Row="1" Grid.Column="8" IsChecked="True"/>
+            <CheckBox Content="補給艦" Grid.Row="2" Grid.Column="0" IsChecked="True"/>
+            <CheckBox Content="水上機母艦" Grid.Row="2" Grid.Column="1" IsChecked="True"/>
+            <CheckBox Content="潜水母艦" Grid.Row="2" Grid.Column="0" IsChecked="True"/>
+            <CheckBox Content="工作艦" Grid.Row="2" Grid.Column="2" IsChecked="True"/>
+            <CheckBox Content="揚陸艦" Grid.Row="2" Grid.Column="3" IsChecked="True"/>
+        </Grid>
+
+        <Border 
+        BorderThickness="1,1,1,1" 
+        BorderBrush="Black" 
+        Grid.Column="0"
+        Grid.ColumnSpan="8"
+        Grid.Row="2" 
+        Grid.RowSpan="2">
+        </Border>
+        <DataGrid Grid.Row="4" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="8"/>
+        
+        <!-- 下記の表示は一旦保留
+        <Grid Grid.Column="4" Grid.ColumnSpan="4" Grid.Row="1" Background="#FFC8C8C8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Content="合計: 0" Grid.Column="0" Grid.Row="0" FontSize="8"/>
+            <Label Content="戦艦系: 0" Grid.Column="1" Grid.Row="0" FontSize="8"/>
+            <Label Content="空母系: 0" Grid.Column="2" Grid.Row="0" FontSize="8"/>
+            <Label Content="重巡洋艦系: 0" Grid.Column="3" Grid.Row="0" FontSize="8"/>
+            <Label Content="軽巡洋艦系: 0" Grid.Column="4" Grid.Row="0" FontSize="8"/>
+            <Label Content="駆逐艦系: 0" Grid.Column="0" Grid.Row="1" FontSize="8"/>
+            <Label Content="海防艦系: 0" Grid.Column="1" Grid.Row="1" FontSize="8"/>
+            <Label Content="潜水艦系: 0" Grid.Column="2" Grid.Row="1" FontSize="8"/>
+            <Label Content="補助艦: 0" Grid.Column="3" Grid.Row="1" FontSize="8"/>
+        </Grid>
+        -->
+
+    </Grid>
+</Window>
