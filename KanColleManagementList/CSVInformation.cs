@@ -22,6 +22,7 @@ namespace KanColleManagementList
             //書き込むファイルを開く
             System.IO.StreamWriter sr = new System.IO.StreamWriter(csvPath, false, enc);
             //コメントテスト
+            //あいうえお
             int colCount = dt.Columns.Count;
             int lastColIndex = colCount - 1;
 
