@@ -31,9 +31,13 @@ namespace KanColleManagementList
         /// </summary>
         CSVInformation CSVinf = new CSVInformation();
 
+
         public MainWindow()
         {
             InitializeComponent();
+            if (File.Exists()) 
+            {
+            }
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)

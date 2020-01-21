@@ -2,12 +2,25 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Text;
 
 namespace KanColleManagementList
 {
     class CSVInformation
     {
+
+        /// <summary>
+        /// 艦隊データCsvファイル格納場所
+        /// </summary>
+        static String KanColleCsvFilePath { get; set; }
+
+
+        CSVInformation() 
+        {
+            KanColleCsvFilePath = Directory.GetCurrentDirectory()+ "\\Data\\KanColleData.csv";
+        }
+
         /// <summary>
         /// DataTableの内容をCSVファイルに保存する
         /// </summary>
@@ -21,8 +34,6 @@ namespace KanColleManagementList
 
             //書き込むファイルを開く
             System.IO.StreamWriter sr = new System.IO.StreamWriter(csvPath, false, enc);
-            //コメントテスト
-            //Branchテスト
             int colCount = dt.Columns.Count;
             int lastColIndex = colCount - 1;
 
