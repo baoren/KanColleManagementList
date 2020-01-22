@@ -96,7 +96,7 @@
         Grid.Row="2" 
         Grid.RowSpan="2">
         </Border>
-        <DataGrid Grid.Row="4" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="8"/>
+        <DataGrid x:Name="KanColleDataGrid" Grid.Row="4" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="8" DataContext="{Binding}" ItemsSource="{Binding}"/>
         
         <!-- 下記の表示は一旦保留
         <Grid Grid.Column="4" Grid.ColumnSpan="4" Grid.Row="1" Background="#FFC8C8C8">

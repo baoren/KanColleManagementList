@@ -21,23 +21,11 @@ namespace KanColleManagementList
     /// </summary>
     public partial class MainWindow : Window
     {
-        /// <summary>
-        /// 艦隊一覧を格納する変数
-        /// </summary>
-        DataTable table = new DataTable("KabColleTable");
-
-        /// <summary>
-        /// CSVファイルの操作
-        /// </summary>
-        CSVInformation CSVinf = new CSVInformation();
-
-
+        DataInfo KanColleData = new DataInfo();
         public MainWindow()
         {
             InitializeComponent();
-            if (File.Exists()) 
-            {
-            }
+            KanColleDataGrid.DataContext = KanColleData.inputDatable();
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)

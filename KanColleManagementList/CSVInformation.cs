@@ -13,10 +13,10 @@ namespace KanColleManagementList
         /// <summary>
         /// 艦隊データCsvファイル格納場所
         /// </summary>
-        static String KanColleCsvFilePath { get; set; }
+        public String KanColleCsvFilePath { get; set; }
 
 
-        CSVInformation() 
+        public CSVInformation() 
         {
             KanColleCsvFilePath = Directory.GetCurrentDirectory()+ "\\Data\\KanColleData.csv";
         }
