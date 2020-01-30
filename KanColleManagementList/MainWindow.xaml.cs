@@ -37,5 +37,10 @@ namespace KanColleManagementList
         {
 
         }
+
+        private void KanColleDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

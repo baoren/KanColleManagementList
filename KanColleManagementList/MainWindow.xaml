@@ -39,9 +39,9 @@
             </MenuItem>
         </Menu>
         
-        <TextBox Grid.Column="0" Grid.ColumnSpan="2"  Grid.Row="1" VerticalAlignment="Bottom" Margin="5,0,0,2"/>
-        <Button x:Name="SearchButton" Content="検索" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Bottom" Width="100" Margin="0,0,0,2" Click="SearchButton_Click"/>
-        <Button x:Name="CancelButton" Content="取り消し" Grid.Column="3" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Bottom" Width="100" Margin="0,0,0,2" Click="CancelButton_Click"/>
+        <TextBox Grid.Column="0" Grid.ColumnSpan="2"  Grid.Row="1" VerticalAlignment="Bottom" Margin="5,0,0,20"/>
+        <Button x:Name="SearchButton" Content="検索" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Bottom" Width="100" Margin="0,0,0,20" Click="SearchButton_Click"/>
+        <Button x:Name="CancelButton" Content="取り消し" Grid.Column="3" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Bottom" Width="100" Margin="0,0,0,20" Click="CancelButton_Click"/>
         
         <Grid Grid.Row="2" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="8" Background="#FFC8C8C8">
             <Grid.ColumnDefinitions>
@@ -83,7 +83,6 @@
             <CheckBox Content="潜水空母" Grid.Row="1" Grid.Column="8" IsChecked="True"/>
             <CheckBox Content="補給艦" Grid.Row="2" Grid.Column="0" IsChecked="True"/>
             <CheckBox Content="水上機母艦" Grid.Row="2" Grid.Column="1" IsChecked="True"/>
-            <CheckBox Content="潜水母艦" Grid.Row="2" Grid.Column="0" IsChecked="True"/>
             <CheckBox Content="工作艦" Grid.Row="2" Grid.Column="2" IsChecked="True"/>
             <CheckBox Content="揚陸艦" Grid.Row="2" Grid.Column="3" IsChecked="True"/>
         </Grid>
@@ -96,8 +95,19 @@
         Grid.Row="2" 
         Grid.RowSpan="2">
         </Border>
-        <DataGrid x:Name="KanColleDataGrid" Grid.Row="4" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="8" DataContext="{Binding}" ItemsSource="{Binding}"/>
-        
+        <DataGrid x:Name="KanColleDataGrid" Grid.Row="4" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="8" DataContext="{Binding}" ItemsSource="{Binding}" SelectionChanged="KanColleDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="艦名" Binding="{Binding 艦名}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="艦種" Binding="{Binding 艦種}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="艦種型" Binding="{Binding 艦種型}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Lv" Binding="{Binding LV}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="前回Lv" Binding="{Binding 前回Lv}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="変動値" Binding="{Binding 変動値}" Width="*"></DataGridTextColumn>
+            </DataGrid.Columns>
+            
+        </DataGrid>
+
         <!-- 下記の表示は一旦保留
         <Grid Grid.Column="4" Grid.ColumnSpan="4" Grid.Row="1" Background="#FFC8C8C8">
             <Grid.ColumnDefinitions>
