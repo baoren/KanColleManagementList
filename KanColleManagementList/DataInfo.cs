@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*
+データテーブルを処理する
+ */
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -9,29 +12,50 @@ namespace KanColleManagementList
     class DataInfo
     {
         /// <summary>
-        /// CSVファイルの操作
+        /// CSVファイルの操作用クラスの呼び出し
         /// </summary>
         CSVInformation CSVinf = new CSVInformation();
 
         /// <summary>
         /// 艦隊一覧を格納する変数
         /// </summary>
-        private DataTable KanColleData = new DataTable("KabColleTable");
+        //private DataTable KanColleData = new DataTable();
+        public DataTable KanColleData { get; set; }
+        
+        /// <summary>
+        /// フォルダにあるcsv格納する。
+        /// </summary>
+        public DataTable oldKanColleData { get; set; }
 
         /// <summary>
-        /// csvを読み込んだデータテーブルを返す
+        /// 読み込んだcsvを格納する
         /// </summary>
-        /// <returns></returns>
-        public DataTable inputDatable()
+        private DataTable inputKanColleData { get; set; }
+
+        /// <summary>
+        /// 起動時のコンストラクタ。
+        /// 起動時にDataフォルダにあるcsvを読み込む
+        /// </summary>
+        public DataInfo()
         {
+            //データテーブルのインスタンス化
+            KanColleData = new DataTable();
+            oldKanColleData = new DataTable();
+            inputKanColleData = new DataTable();
+
+            //ファイルがあればデータを読み込む
             if (File.Exists(CSVinf.KanColleCsvFilePath))
             {
                 CSVinf.ReadCSV(KanColleData, false, CSVinf.KanColleCsvFilePath, ",", false);
             }
+        }
+
+        public DataTable DataTableImport() 
+        {
             return KanColleData;
         }
 
-        private String BattleShipModel(String BattleShipType)
+        private String BattleShipMapping(String BattleShipType)
         {
             String Type = "";
             switch ( BattleShipType ) 

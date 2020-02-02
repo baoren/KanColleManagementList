@@ -25,7 +25,8 @@ namespace KanColleManagementList
         public MainWindow()
         {
             InitializeComponent();
-            KanColleDataGrid.DataContext = KanColleData.inputDatable();
+            KanColleDataGrid.DataContext = KanColleData.KanColleData;
+            //KanColleDataGrid.DataContext = KanColleData.getKanColleDatable();
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
