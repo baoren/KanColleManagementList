@@ -1,6 +1,7 @@
 ﻿/*
 データテーブルを処理する
  */
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -46,12 +47,35 @@ namespace KanColleManagementList
             //ファイルがあればデータを読み込む
             if (File.Exists(CSVinf.KanColleCsvFilePath))
             {
-                CSVinf.ReadCSV(KanColleData, false, CSVinf.KanColleCsvFilePath, ",", false);
+                CSVinf.ReadCSV(KanColleData, true, CSVinf.KanColleCsvFilePath, ",", false);
             }
         }
 
-        public DataTable DataTableImport() 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public DataTable UpdateViewDataTable() 
         {
+            //現在のデータをoldデータとしてコピーする.
+            oldKanColleData = KanColleData.Copy();
+            
+            //ダイアログインスタンス作成
+            var dialog = new OpenFileDialog();
+            //ファイルの種類の設定
+            dialog.Filter = "csvファイル (*.csv)|*.csv|全てのファイル (*.*)|*.*";
+            //ダイアログを表示する
+            if (dialog.ShowDialog() == true)
+            {
+                //読み込んだcsvをデータテーブルに追加
+                CSVinf.ReadCSV(inputKanColleData, true, dialog.FileName, ",", false);
+            }
+            else 
+            {
+                //キャンセルされた場合はデータはそのまま。
+                return KanColleData;
+            }
             return KanColleData;
         }
 

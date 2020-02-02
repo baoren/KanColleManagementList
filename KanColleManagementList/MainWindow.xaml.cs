@@ -43,5 +43,24 @@ namespace KanColleManagementList
         {
 
         }
+
+        private void Click_CsvImport(object sender, SelectionChangedEventArgs e) 
+        {
+
+        }
+
+        private void Click_Data(object sender, SelectionChangedEventArgs e) 
+        {
+        }
+
+        private void Data_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CsvImport_Click(object sender, RoutedEventArgs e)
+        {
+            KanColleData.UpdateViewDataTable();
+        }
     }
 }
