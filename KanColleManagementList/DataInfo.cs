@@ -76,7 +76,28 @@ namespace KanColleManagementList
                 //キャンセルされた場合はデータはそのまま。
                 return KanColleData;
             }
+
+
+
+            //現在のcsvファイルをoldファイルとして置き換える
+            ReplaceFiles(CSVinf.KanColleCsvFilePath, CSVinf.oldKanColleCsvFilePath);
+
             return KanColleData;
+        }
+
+        /// <summary>
+        /// ファイルの置き換えを行う。
+        /// 置き換えるファイルがない場合はスキップされる。
+        /// 同名のファイルがある場合は上書きされます。
+        /// </summary>
+        /// <param name="oldFoleName">置き換えるファイル名</param>
+        /// <param name="NewFileName">置き換え後のファイル名</param>
+        public void ReplaceFiles( String oldFoleName,String NewFileName ) 
+        {
+            if (File.Exists(oldFoleName)) 
+            {
+                File.Copy(oldFoleName, NewFileName,true);
+            }
         }
 
         private String BattleShipMapping(String BattleShipType)

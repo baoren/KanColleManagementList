@@ -14,11 +14,25 @@ namespace KanColleManagementList
         /// 艦隊データCsvファイル格納場所
         /// </summary>
         public String KanColleCsvFilePath { get; set; }
+        public String oldKanColleCsvFilePath { get; set; }
+        public String KanColleCsvDirectoryPath { get; set; }
 
-
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public CSVInformation() 
         {
-            KanColleCsvFilePath = Directory.GetCurrentDirectory()+ "\\Data\\KanColleData.csv";
+            init();
+        }
+
+        /// <summary>
+        /// 初期化関数
+        /// </summary>
+        public void init() 
+        {
+            KanColleCsvDirectoryPath = Directory.GetCurrentDirectory() + "\\Data";
+            KanColleCsvFilePath = KanColleCsvDirectoryPath + "\\KanColleData.csv";
+            oldKanColleCsvFilePath = KanColleCsvDirectoryPath + "\\old_KanColleData.csv";
         }
 
         /// <summary>
