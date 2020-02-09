@@ -25,7 +25,7 @@ namespace KanColleManagementList
         public MainWindow()
         {
             InitializeComponent();
-            KanColleDataGrid.DataContext = KanColleData.KanColleData;
+            //KanColleDataGrid.DataContext = KanColleData.KanColleData;
             //KanColleDataGrid.DataContext = KanColleData.getKanColleDatable();
         }
 
@@ -60,7 +60,8 @@ namespace KanColleManagementList
 
         private void CsvImport_Click(object sender, RoutedEventArgs e)
         {
-            KanColleData.UpdateViewDataTable();
+            KanColleData.RoadDataTable();
+            KanColleDataGrid.DataContext = KanColleData.KanColleData;
         }
     }
 }

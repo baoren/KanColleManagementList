@@ -51,12 +51,42 @@ namespace KanColleManagementList
             }
         }
 
+        /// <summary>
+        /// 開くボタンが押されたときに呼び出される
+        /// </summary>
+        public void RoadDataTable() 
+        {
+            //CSVファイルを読み込んだときのみファイルを置き換える
+            if (ReadInputDataTable())
+            {
+                //現在のcsvファイルをoldファイルとして置き換える
+                ReplaceFiles(CSVinf.KanColleCsvFilePath, CSVinf.oldKanColleCsvFilePath);
+                //インプットしたデータを初期化する
+                inputKanColleData.Reset();
+                oldKanColleData.Reset();
+            }
+        }
 
         /// <summary>
-        /// 
+        /// データ組み立て用関数の予定
+        /// データテーブルをどうやって比較するか検討中
         /// </summary>
-        /// <returns></returns>
-        public DataTable UpdateViewDataTable() 
+        public void AssembleDataTable() 
+        {
+
+            //課題あり：データテーブルの比較方法どうするか
+
+            foreach( DataRow oldData in inputKanColleData.Rows) 
+            {
+                inputKanColleData.Select("");
+            }
+        }
+
+        /// <summary>
+        /// CSVを読み込んでデータテーブルに格納する。
+        /// </summary>
+        /// <returns>ファイルの読み込み有無を返す</returns>
+        public Boolean ReadInputDataTable() 
         {
             //現在のデータをoldデータとしてコピーする.
             oldKanColleData = KanColleData.Copy();
@@ -70,19 +100,9 @@ namespace KanColleManagementList
             {
                 //読み込んだcsvをデータテーブルに追加
                 CSVinf.ReadCSV(inputKanColleData, true, dialog.FileName, ",", false);
+                return true;
             }
-            else 
-            {
-                //キャンセルされた場合はデータはそのまま。
-                return KanColleData;
-            }
-
-
-
-            //現在のcsvファイルをoldファイルとして置き換える
-            ReplaceFiles(CSVinf.KanColleCsvFilePath, CSVinf.oldKanColleCsvFilePath);
-
-            return KanColleData;
+            else { return false; }
         }
 
         /// <summary>
