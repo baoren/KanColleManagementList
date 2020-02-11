@@ -59,8 +59,12 @@ namespace KanColleManagementList
             //CSVファイルを読み込んだときのみファイルを置き換える
             if (ReadInputDataTable())
             {
+                //構造のみをのこしてデータを削除
+                KanColleData.Clear();
                 //現在のcsvファイルをoldファイルとして置き換える
                 ReplaceFiles(CSVinf.KanColleCsvFilePath, CSVinf.oldKanColleCsvFilePath);
+                //データの更新
+                AssembleDataTable();
                 //インプットしたデータを初期化する
                 inputKanColleData.Reset();
                 oldKanColleData.Reset();
@@ -68,17 +72,42 @@ namespace KanColleManagementList
         }
 
         /// <summary>
-        /// データ組み立て用関数の予定
-        /// データテーブルをどうやって比較するか検討中
+        /// 本体データ組み立て用関数
         /// </summary>
         public void AssembleDataTable() 
         {
-
-            //課題あり：データテーブルの比較方法どうするか
-
-            foreach( DataRow oldData in inputKanColleData.Rows) 
+            //ID検索
+            for ( int row=0; row<inputKanColleData.Rows.Count; row++ ) 
             {
-                inputKanColleData.Select("");
+                DataRow dataRow = KanColleData.NewRow();
+                //旧データに読み込んだデータのIDがあるかチェック
+                DataRow[] Check = oldKanColleData.Select("ID = "+ inputKanColleData.Rows[row]["ID"]);
+
+                //IDは変わらないためそのまま入れる
+                KanColleData.Rows[row]["ID"] = inputKanColleData.Rows[row]["ID"].ToString();
+                //艦名は読み込んだデータの物を正とする
+                KanColleData.Rows[row]["艦名"] = inputKanColleData.Rows[row]["艦名"].ToString();
+                //Levelは読み込んだデータを入れる
+                KanColleData.Rows[row]["Lv"] = int.Parse(inputKanColleData.Rows[row]["Lv"].ToString());
+                //艦種は読み込んだデータを入れる
+                KanColleData.Rows[row]["艦種"] = inputKanColleData.Rows[row]["艦種"].ToString();
+                //艦種の型変換
+                KanColleData.Rows[row]["艦種型"] = BattleShipMapping(KanColleData.Rows[row]["艦種"].ToString());
+                //一致するデータがあった場合
+                if (Check.Length == 1)
+                {
+                    //前回のレベルを入れる
+                    KanColleData.Rows[row]["前回Lv"] = int.Parse(Check[0]["Lv"].ToString());
+                    //前回からの変動値を計算する。
+                    //他にいい方法があれば変える予定
+                    KanColleData.Rows[row]["変動値"] = int.Parse(inputKanColleData.Rows[row]["Lv"].ToString()) - int.Parse(Check[0]["Lv"].ToString());
+                }
+                else 
+                {
+                    //一致しないIDには0を入れる
+                    KanColleData.Rows[row]["前回Lv"] = 0;
+                    KanColleData.Rows[row]["変動値"] = 0;
+                }
             }
         }
 
@@ -120,7 +149,7 @@ namespace KanColleManagementList
             }
         }
 
-        private String BattleShipMapping(String BattleShipType)
+        public String BattleShipMapping(String BattleShipType)
         {
             String Type = "";
             switch ( BattleShipType ) 
